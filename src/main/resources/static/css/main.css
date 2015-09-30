@@ -1,0 +1,63 @@
+.panel-primary > .panel-heading {
+    background-color: #40BFFB;
+    font-weight: bold;
+}
+
+.heading-sub {
+    text-align:center;
+    color: #40BFFB;
+}
+
+.btn-search {
+    background-color: #FF7900;
+    color: #FFFFFF;
+    font-size: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.btn-search.focus, .btn-search:focus, .btn-search:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    height: 60px;
+    padding-left: 50px;
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 30px 25px;
+    pointer-events: none;
+}
+
+.label-field {
+    font-size: 18px;
+    color: #666666;
+}
+
+.label-field-check {
+    font-weight: normal;
+}
+
+.icon-calendar {
+    background-image: url("../img/icon_calendar.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.icon-map-marker {
+    background-image: url("../img/icon_map_marker.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.label-table {
+    font-size: 16px;
+    color: #FFFFFF;
+}

@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Hotels Search</title>
+    <link rel="stylesheet" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css"/>
+    <script src="../jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+    <script src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+    <script src="../jquery-ui-1.11.4.custom/datepicker-pt-BR.js"></script>
+    <script>
+        $(function() {
+            $.datepicker.setDefaults( $.datepicker.regional[ "pt-BR" ] );
+            $( "#beginDate" ).datepicker({
+                minDate: 0,
+                onClose: function( selectedDate ) {
+                    var dateMin = new Date($("#beginDate").datepicker( "getDate" ));
+                    dateMin.setDate(dateMin.getDate() + 1);
+                    $( "#endDate" ).datepicker( "option", "minDate", dateMin);
+                }
+            });
+            $( "#endDate" ).datepicker({
+                minDate: 0 ,
+                onClose: function( selectedDate ) {
+                    var dateMax = new Date($("#endDate").datepicker( "getDate" ));
+                    dateMax.setDate(dateMax.getDate() + 1);
+                    $( "#beginDate" ).datepicker( "option", "maxDate", selectedDate );
+                }
+            });
+
+            $('#isAnyDate').click(function() {
+                if ($(this).is(':checked')) {
+                    $( "#endDate" ).datepicker("setDate", null );
+                    $( "#beginDate" ).datepicker("setDate", null );
+                    $( "#endDate" ).datepicker( "option", "disabled", true );
+                    $( "#beginDate" ).datepicker( "option", "disabled", true );
+                }else{
+                    $( "#endDate" ).datepicker( "option", "disabled", false );
+                    $( "#beginDate" ).datepicker( "option", "disabled", false );
+                }
+            });
+
+
+            $( "#location" ).autocomplete({
+                source: function (request, response) {
+                    $.getJSON("/hotels/?term=" + request.term, function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.cidade +" - "+item.nome,
+                                    value: item.id
+                                }
+                            }));
+                    });
+                },
+                minLength: 3,
+                delay: 100 ,
+                select: function (event, ui) {
+                    $("#location").val(ui.item.label);
+                    $("#locationId").val(ui.item.value);
+                    return false;
+                }
+            });
+
+        });
+    </script>
+</head>
+<body>
+<div class="container" style="margin-top: 5%">
+<div class="panel panel-primary">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><img src="../img/icon_title.png" class="center-block" /></div>
+    <div class="panel-body">
+        <h3 class="heading-sub">+ 1700.000 hotéis, pousadas e resorts no mundo todo.</h3>
+
+        <form role="form" action="/availables" method="post">
+             <input type="hidden" id="locationId" />
+            <div class="row">
+                <label class="col-md-4 label-field">Quer ficar onde?</label>
+                <label class="col-md-8 label-field">Quando? (Entrada e Saída)</label>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group left-inner-addon">
+                    <i class="icon-map-marker"></i>
+                    <label class="control-label  sr-only">Local</label>
+                    <input id="location" type="text" class="form-control" placeholder="cidade ou hotel"  />
+                </div>
+
+                <div class="col-md-4 form-group left-inner-addon">
+                    <i class="icon-calendar"></i>
+                    <label class="control-label  sr-only">Entrada</label>
+                    <input id="beginDate" type="text" class="form-control" placeholder="entrada"  />
+                </div>
+                <div class="col-md-4 form-group left-inner-addon">
+                    <i class="icon-calendar"></i>
+                    <label class="control-label  sr-only">Saída</label>
+                    <input id="endDate" type="text" class="form-control" placeholder="saída" />
+                </div>
+             </div>
+
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4  form-group">
+                    <input id="isAnyDate" type="checkbox" />
+                    <label class="label-field-check">Ainda não defini as datas</label>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-search"><img src="../img/icon_btn_search.png"/>BUSCAR</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+<div th:if="${not #lists.isEmpty(availables)}">
+    <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading"><label class="label-table">Disponibilidades</label></div>
+    <table class="table table-bordered">
+        <tr>
+            <th>Cidade</th>
+            <th>Hotel</th>
+            <th>Data</th>
+            <th>Disponível</th>
+        </tr>
+        <tr th:each="available : ${availables}">
+            <td th:text="${available.hotel.cidade}">Cidade</td>
+            <td th:text="${available.hotel.nome}">Hotel</td>
+            <td th:text="${#dates.format(available.date, 'dd/MM/yyyy')}">Data</td>
+            <td th:text="*{available.available} ? 'Sim' : 'Não'">Disponível</td>
+        </tr>
+    </table>
+    </div>
+</div>
+</div>
+</body>
+</html>
