@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
+    /**
+     * Redireciona para a home da aplicacao
+     * @return pagina inicial
+     */
     @RequestMapping("/")
     public String home() {
         return "index";

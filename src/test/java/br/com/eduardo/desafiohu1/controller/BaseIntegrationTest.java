@@ -1,27 +1,25 @@
-package br.com.eduardo.desafiohu1;
+package br.com.eduardo.desafiohu1.controller;
 
+import br.com.eduardo.desafiohu1.Application;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 /**
- * @author: eduardo.barbosa
- * @since: 29/09/2015
+ * Created by Eduardo on 01/10/2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class IndexControllerTest {
-
+@IntegrationTest("server.port:0")
+public class BaseIntegrationTest{
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -29,14 +27,11 @@ public class IndexControllerTest {
     private MockMvc mockMvc;
 
     @Before
-    public void setUp() throws Exception {
+    public void setup() throws Exception{
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    @Test
-    public void verificaIndexPageLoad() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+    public MockMvc getMockMvc() {
+        return mockMvc;
     }
-
 }

@@ -1,8 +1,9 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Hotels Search</title>
+    <link href="../bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css"/>
     <script src="../jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
     <script src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
@@ -27,7 +28,7 @@
                 }
             });
 
-            $('#isAnyDate').click(function() {
+            $('#anyDate').click(function() {
                 if ($(this).is(':checked')) {
                     $( "#endDate" ).datepicker("setDate", null );
                     $( "#beginDate" ).datepicker("setDate", null );
@@ -42,7 +43,7 @@
 
             $( "#location" ).autocomplete({
                 source: function (request, response) {
-                    $.getJSON("/hotels/?term=" + request.term, function (data) {
+                    $.getJSON("/search/hotel/?term=" + request.term, function (data) {
                             response($.map(data, function (item) {
                                 return {
                                     label: item.cidade +" - "+item.nome,
@@ -65,14 +66,19 @@
 </head>
 <body>
 <div class="container" style="margin-top: 5%">
+<div class="alert alert-danger" th:if="${not #strings.isEmpty(error)}">
+    <span th:text="${error}" />
+</div>
 <div class="panel panel-primary">
     <!-- Default panel contents -->
     <div class="panel-heading"><img src="../img/icon_title.png" class="center-block" /></div>
     <div class="panel-body">
         <h3 class="heading-sub">+ 1700.000 hotéis, pousadas e resorts no mundo todo.</h3>
 
-        <form role="form" action="/availables" method="post">
-             <input type="hidden" id="locationId" />
+        <form role="form" action="#"
+              th:action="@{/search/available}"
+              th:object="${search}" method="post">
+             <input type="hidden" id="locationId" th:field="*{locationId}" />
             <div class="row">
                 <label class="col-md-4 label-field">Quer ficar onde?</label>
                 <label class="col-md-8 label-field">Quando? (Entrada e Saída)</label>
@@ -82,24 +88,24 @@
                 <div class="col-md-4 form-group left-inner-addon">
                     <i class="icon-map-marker"></i>
                     <label class="control-label  sr-only">Local</label>
-                    <input id="location" type="text" class="form-control" placeholder="cidade ou hotel"  />
+                    <input id="location" type="text" class="form-control" placeholder="cidade ou hotel" th:field="*{location}"  />
                 </div>
 
                 <div class="col-md-4 form-group left-inner-addon">
                     <i class="icon-calendar"></i>
                     <label class="control-label  sr-only">Entrada</label>
-                    <input id="beginDate" type="text" class="form-control" placeholder="entrada"  />
+                    <input id="beginDate" type="text" class="form-control" placeholder="entrada" th:field="*{beginDate}"  />
                 </div>
                 <div class="col-md-4 form-group left-inner-addon">
                     <i class="icon-calendar"></i>
                     <label class="control-label  sr-only">Saída</label>
-                    <input id="endDate" type="text" class="form-control" placeholder="saída" />
+                    <input id="endDate" type="text" class="form-control" placeholder="saída" th:field="*{endDate}" />
                 </div>
              </div>
 
             <div class="row">
                 <div class="col-md-offset-4 col-md-4  form-group">
-                    <input id="isAnyDate" type="checkbox" />
+                    <input id="anyDate" type="checkbox" th:field="*{anyDate}"  />
                     <label class="label-field-check">Ainda não defini as datas</label>
                 </div>
             </div>
@@ -113,9 +119,6 @@
     </div>
 </div>
 <div th:if="${not #lists.isEmpty(availables)}">
-    <div class="panel panel-primary">
-        <!-- Default panel contents -->
-        <div class="panel-heading"><label class="label-table">Disponibilidades</label></div>
     <table class="table table-bordered">
         <tr>
             <th>Cidade</th>
@@ -131,7 +134,6 @@
         </tr>
     </table>
     </div>
-</div>
 </div>
 </body>
 </html>
