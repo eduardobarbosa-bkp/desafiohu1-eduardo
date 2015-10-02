@@ -1,11 +1,11 @@
 package br.com.eduardo.desafiohu1.service.impl;
 
-import br.com.eduardo.desafiohu1.domain.HotelDate;
 import br.com.eduardo.desafiohu1.domain.Hotel;
+import br.com.eduardo.desafiohu1.domain.HotelDate;
 import br.com.eduardo.desafiohu1.repository.HotelRepository;
 import br.com.eduardo.desafiohu1.service.HotelService;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -19,6 +19,7 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService {
 
     @Autowired
+    @Qualifier("hotelRepository")
     private HotelRepository repository;
 
     @Override
@@ -31,7 +32,6 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<HotelDate> findHotelDateByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, boolean anyDate) throws Exception {
-        LocalDate today = LocalDate.now();
         if(StringUtils.isEmpty(locationId)){
             throw new Exception("A localidade deve ser informada!");
         }else {

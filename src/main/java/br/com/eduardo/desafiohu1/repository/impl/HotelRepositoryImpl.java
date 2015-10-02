@@ -21,7 +21,7 @@ import java.util.Scanner;
 /**
  * Created by Eduardo on 01/10/2015.
  */
-@Repository
+@Repository("hotelRepository")
 public class HotelRepositoryImpl implements HotelRepository {
 
 

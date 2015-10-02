@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -32,6 +33,7 @@ public class HotelRepositoryTest {
     private static final Date DATE_AVAILABLE = LocalDate.parse("2015-05-04").toDate();
 
     @Autowired
+    @Qualifier("hotelRepository")
     private HotelRepository repository;
 
     @Test

@@ -1,10 +1,14 @@
 package br.com.eduardo.desafiohu1.domain;
 
+import java.io.Serializable;
+
 /**
  * @author: eduardo.barbosa
  * @since: 30/09/2015
  */
-public class Hotel {
+public class Hotel implements Serializable {
+
+    private static final long serialVersionUID = 262841061338493222L;
 
     private String id;
 
