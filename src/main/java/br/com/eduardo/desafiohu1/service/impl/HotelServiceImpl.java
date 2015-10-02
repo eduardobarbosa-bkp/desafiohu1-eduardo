@@ -31,7 +31,7 @@ public class HotelServiceImpl implements HotelService {
     }
 
     @Override
-    public List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, Boolean anyDate) throws Exception {
+    public List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, boolean anyDate) throws Exception {
         LocalDate today = LocalDate.now();
         if(StringUtils.isEmpty(locationId)){
             throw new Exception("A localidade deve ser informada!");

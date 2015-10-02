@@ -19,7 +19,7 @@ public class SearchForm {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date endDate;
 
-    private Boolean anyDate;
+    private boolean anyDate;
 
     public String getLocationId() {
         return locationId;
@@ -53,11 +53,11 @@ public class SearchForm {
         this.endDate = endDate;
     }
 
-    public Boolean getAnyDate() {
+    public boolean isAnyDate() {
         return anyDate;
     }
 
-    public void setAnyDate(Boolean anyDate) {
+    public void setAnyDate(boolean anyDate) {
         this.anyDate = anyDate;
     }
 }

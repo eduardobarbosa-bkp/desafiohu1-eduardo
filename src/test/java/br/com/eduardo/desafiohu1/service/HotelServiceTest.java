@@ -65,26 +65,26 @@ public class HotelServiceTest {
 
     @Test(expected = Exception.class)
     public void findDisponibilidadeByLocationIdAndPeriodLocationIdNull() throws Exception {
-        service.findDisponibilidadeByLocationIdAndPeriod(null, null, null, null);
+        service.findDisponibilidadeByLocationIdAndPeriod(null, null, null, false);
     }
 
     @Test(expected = Exception.class)
     public void findDisponibilidadeByLocationIdAndPeriodPeriodNull() throws Exception {
-        service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, null, null, Boolean.FALSE);
+        service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, null, null, false);
     }
 
     @Test(expected = Exception.class)
     public void findDisponibilidadeByLocationIdAndPeriodBeginDateBeforeToday() throws Exception {
         LocalDate now = LocalDate.now();
         LocalDate yesterday = now.minusDays(1);
-        service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, yesterday.toDate(), now.toDate(), Boolean.FALSE);
+        service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, yesterday.toDate(), now.toDate(), false);
     }
 
     @Test
     public void findDisponibilidadeByLocationIdAndPeriodValid() throws Exception {
         LocalDate now = LocalDate.now();
         LocalDate tomorrow = now.plusDays(1);
-        List<Disponibilidade> list = service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, now.toDate(), tomorrow.toDate(), Boolean.FALSE);
+        List<Disponibilidade> list = service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, now.toDate(), tomorrow.toDate(), false);
         assertNotNull(list);
         assertTrue(list.size() == 1);
         Disponibilidade disponibilidade = list.get(0);
@@ -93,7 +93,7 @@ public class HotelServiceTest {
 
     @Test
     public void findDisponibilidadeByLocationIdAndPeriodAnyDate() throws Exception {
-        List<Disponibilidade> list = service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, null, null, Boolean.TRUE);
+        List<Disponibilidade> list = service.findDisponibilidadeByLocationIdAndPeriod(HOTEL_1_ID, null, null, true);
         assertNotNull(list);
         assertTrue(list.size() == 2);
     }

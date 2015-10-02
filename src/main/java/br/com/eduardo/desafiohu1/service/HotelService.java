@@ -31,6 +31,6 @@ public interface HotelService {
      * @param anyDate flag para ignorar o periodo informado
      * @return lista de disponiblidades do hotel no periodo informado
      */
-    List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, Boolean anyDate) throws Exception;
+    List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, boolean anyDate) throws Exception;
 
 }

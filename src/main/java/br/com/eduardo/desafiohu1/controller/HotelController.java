@@ -67,7 +67,7 @@ public class HotelController {
         model.addAttribute("search", search);
         List<Disponibilidade> disponibilidades = null;
         try {
-            disponibilidades = service.findDisponibilidadeByLocationIdAndPeriod(search.getLocationId(), search.getBeginDate(), search.getEndDate(), search.getAnyDate());
+            disponibilidades = service.findDisponibilidadeByLocationIdAndPeriod(search.getLocationId(), search.getBeginDate(), search.getEndDate(), search.isAnyDate());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
