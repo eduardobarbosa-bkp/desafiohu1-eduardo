@@ -1,4 +1,4 @@
-package br.com.eduardo.desafiohu1.repository.impl;
+package br.com.eduardo.desafiohu1.repository;
 
 import br.com.eduardo.desafiohu1.domain.Hotel;
 import br.com.eduardo.desafiohu1.domain.HotelDate;
