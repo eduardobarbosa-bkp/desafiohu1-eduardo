@@ -1,6 +1,6 @@
 package br.com.eduardo.desafiohu1.service;
 
-import br.com.eduardo.desafiohu1.domain.Disponibilidade;
+import br.com.eduardo.desafiohu1.domain.HotelDate;
 import br.com.eduardo.desafiohu1.domain.Hotel;
 
 import java.util.Date;
@@ -31,6 +31,6 @@ public interface HotelService {
      * @param anyDate flag para ignorar o periodo informado
      * @return lista de disponiblidades do hotel no periodo informado
      */
-    List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, boolean anyDate) throws Exception;
+    List<HotelDate> findHotelDateByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, boolean anyDate) throws Exception;
 
 }

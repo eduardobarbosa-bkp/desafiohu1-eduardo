@@ -6,7 +6,7 @@ import java.util.Date;
  * @author: eduardo.barbosa
  * @since: 30/09/2015
  */
-public class Disponibilidade {
+public class HotelDate {
 
     private Hotel hotel;
 
@@ -14,7 +14,7 @@ public class Disponibilidade {
 
     private Boolean available;
 
-    public Disponibilidade(Hotel hotel, Date date, Boolean available) {
+    public HotelDate(Hotel hotel, Date date, Boolean available) {
         this.hotel = hotel;
         this.date = date;
         this.available = available;
@@ -47,9 +47,9 @@ public class Disponibilidade {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Disponibilidade)) return false;
+        if (!(o instanceof HotelDate)) return false;
 
-        Disponibilidade that = (Disponibilidade) o;
+        HotelDate that = (HotelDate) o;
 
         if (!hotel.equals(that.hotel)) return false;
         if (!date.equals(that.date)) return false;

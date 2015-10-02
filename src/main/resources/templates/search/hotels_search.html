@@ -12,7 +12,6 @@
         $(function() {
             $.datepicker.setDefaults( $.datepicker.regional[ "pt-BR" ] );
             $( "#beginDate" ).datepicker({
-                minDate: 0,
                 onClose: function( selectedDate ) {
                     var dateMin = new Date($("#beginDate").datepicker( "getDate" ));
                     dateMin.setDate(dateMin.getDate() + 1);
@@ -20,7 +19,6 @@
                 }
             });
             $( "#endDate" ).datepicker({
-                minDate: 0 ,
                 onClose: function( selectedDate ) {
                     var dateMax = new Date($("#endDate").datepicker( "getDate" ));
                     dateMax.setDate(dateMax.getDate() + 1);
@@ -76,7 +74,7 @@
         <h3 class="heading-sub">+ 1700.000 hotéis, pousadas e resorts no mundo todo.</h3>
 
         <form role="form" action="#"
-              th:action="@{/search/available}"
+              th:action="@{/search/hotelDate}"
               th:object="${search}" method="post">
              <input type="hidden" id="locationId" th:field="*{locationId}" />
             <div class="row">
@@ -118,7 +116,7 @@
 
     </div>
 </div>
-<div th:if="${not #lists.isEmpty(availables)}">
+<div th:if="${not #lists.isEmpty(hotelDates)}">
     <table class="table table-bordered">
         <tr>
             <th>Cidade</th>
@@ -126,11 +124,11 @@
             <th>Data</th>
             <th>Disponível</th>
         </tr>
-        <tr th:each="available : ${availables}">
-            <td th:text="${available.hotel.cidade}">Cidade</td>
-            <td th:text="${available.hotel.nome}">Hotel</td>
-            <td th:text="${#dates.format(available.date, 'dd/MM/yyyy')}">Data</td>
-            <td th:text="*{available.available} ? 'Sim' : 'Não'">Disponível</td>
+        <tr th:each="hotelDate : ${hotelDates}">
+            <td th:text="${hotelDate.hotel.cidade}">Cidade</td>
+            <td th:text="${hotelDate.hotel.nome}">Hotel</td>
+            <td th:text="${#dates.format(hotelDate.date, 'dd/MM/yyyy')}">Data</td>
+            <td th:text="*{hotelDate.available} ? 'Sim' : 'Não'">Disponível</td>
         </tr>
     </table>
     </div>

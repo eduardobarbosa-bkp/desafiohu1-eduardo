@@ -1,0 +1,5 @@
+1,Araruama,Mercatto Casa Hotel
+2,Macae,Boulevard Higienopolis Residence Hotel
+3,Campos,Lucca Hotel Pousada
+4,Resende,Kananxue Hotel
+5,Araruama,Villa Verde Pousada

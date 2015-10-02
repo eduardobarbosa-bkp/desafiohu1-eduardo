@@ -24,8 +24,8 @@ public class HotelControllerTest extends BaseIntegrationTest {
     }
 
     @Test
-    public void checkRequestSearchAvailable() throws Exception {
-        getMockMvc().perform(MockMvcRequestBuilders.post("/search/available"))
+    public void checkRequestSearchHotelDate() throws Exception {
+        getMockMvc().perform(MockMvcRequestBuilders.post("/search/hotelDate"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

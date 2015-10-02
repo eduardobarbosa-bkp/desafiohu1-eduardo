@@ -1,6 +1,6 @@
 package br.com.eduardo.desafiohu1.controller;
 
-import br.com.eduardo.desafiohu1.domain.Disponibilidade;
+import br.com.eduardo.desafiohu1.domain.HotelDate;
 import br.com.eduardo.desafiohu1.domain.Hotel;
 import br.com.eduardo.desafiohu1.form.SearchForm;
 import br.com.eduardo.desafiohu1.service.HotelService;
@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,16 +60,16 @@ public class HotelController {
      * @param model  objeto que encapusula os parametros do request
      * @return pagina de busca de hoteis
      */
-    @RequestMapping(value = "/search/available", method = RequestMethod.POST)
-    public String getAvailable(@ModelAttribute("search") SearchForm search, Model model) {
+    @RequestMapping(value = "/search/hotelDate", method = RequestMethod.POST)
+    public String getHotelDate(@ModelAttribute("search") SearchForm search, Model model) {
         model.addAttribute("search", search);
-        List<Disponibilidade> disponibilidades = null;
+        List<HotelDate> hotelDates = null;
         try {
-            disponibilidades = service.findDisponibilidadeByLocationIdAndPeriod(search.getLocationId(), search.getBeginDate(), search.getEndDate(), search.isAnyDate());
+            hotelDates = service.findHotelDateByLocationIdAndPeriod(search.getLocationId(), search.getBeginDate(), search.getEndDate(), search.isAnyDate());
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
         }
-        model.addAttribute("availables", disponibilidades);
+        model.addAttribute("hotelDates", hotelDates);
         return "search/hotels_search";
     }
 

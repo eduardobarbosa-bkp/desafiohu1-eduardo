@@ -1,7 +1,7 @@
 package br.com.eduardo.desafiohu1.repository;
 
-import br.com.eduardo.desafiohu1.domain.Disponibilidade;
 import br.com.eduardo.desafiohu1.domain.Hotel;
+import br.com.eduardo.desafiohu1.domain.HotelDate;
 
 import java.util.Date;
 import java.util.List;
@@ -12,13 +12,16 @@ import java.util.List;
  */
 public interface HotelRepository {
 
+    String DB_HOTEL_FILE_PATH =  "/hoteis.txt";
+    String DB_HOTEL_DATE_FILE_PATH =  "/disp.txt";
+
     /**
      * Busca de hoteis de acordo com o termo informado, sera pesquisado em cidade ou hotel
      * que contenha o termo no texto
      * @param term string para pesquisa
      * @return lista de hoteis de acordo com o termo pesquisado
      */
-    List<Hotel> findHotelByTerm(String term);
+    List<Hotel> findHotelByTerm(String term) throws Exception;
 
     /**
      * Busca a disponibilidade de um hotel de acordo com um periodo de datas, retornando todos as datas do periodo
@@ -29,7 +32,7 @@ public interface HotelRepository {
      * @param endDate data de termino do periodo
      * @return lista de disponiblidades do hotel no periodo informado
      */
-    List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate);
+    List<HotelDate> findHotelDateByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate)throws Exception;
 
 
 }
