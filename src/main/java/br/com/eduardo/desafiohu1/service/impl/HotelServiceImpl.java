@@ -45,6 +45,10 @@ public class HotelServiceImpl implements HotelService {
                 }
             }
         }
+        if(anyDate){
+            beginDate = today.toDate();
+            endDate = null;
+        }
         return repository.findDisponibilidadeByLocationIdAndPeriod(locationId, beginDate, endDate);
     }
 }
