@@ -4,10 +4,12 @@ import br.com.eduardo.desafiohu1.domain.Disponibilidade;
 import br.com.eduardo.desafiohu1.domain.Hotel;
 import br.com.eduardo.desafiohu1.repository.HotelRepository;
 import br.com.eduardo.desafiohu1.service.HotelService;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,11 +32,17 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<Disponibilidade> findDisponibilidadeByLocationIdAndPeriod(String locationId, Date beginDate, Date endDate, Boolean anyDate) throws Exception {
+        LocalDate today = LocalDate.now();
         if(StringUtils.isEmpty(locationId)){
             throw new Exception("A localidade deve ser informada!");
         }else {
-            if(!anyDate && (beginDate == null || endDate == null)){
-                throw new Exception("As datas de entrada e saida de ser informada!");
+            if(!anyDate){
+                if(beginDate == null || endDate == null) {
+                    throw new Exception("As datas de entrada e saida de ser informada!");
+                }
+                if(LocalDate.fromDateFields(beginDate).isBefore(today)){
+                    throw new Exception("A data de entrada deve ser maior que hoje!");
+                }
             }
         }
         return repository.findDisponibilidadeByLocationIdAndPeriod(locationId, beginDate, endDate);
