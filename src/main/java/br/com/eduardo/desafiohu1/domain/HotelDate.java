@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author: eduardo.barbosa
- * @since: 30/09/2015
+ * Created by Eduardo on 30/09/2015
  */
 public class HotelDate implements Serializable {
 

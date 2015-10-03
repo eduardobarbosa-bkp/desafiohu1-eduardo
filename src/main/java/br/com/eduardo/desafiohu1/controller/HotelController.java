@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author: eduardo.barbosa
- * @since: 30/09/2015
+ * Created by Eduardo on 30/09/2015
  */
 @Controller
 public class HotelController {
 
+    public static final String VIEW_HOTELS_SEARCH = "search/hotels_search";
     @Autowired
     private HotelService service;
 
@@ -30,8 +30,8 @@ public class HotelController {
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String setup(Model model) {
         model.addAttribute("search", new SearchForm());
-        model.addAttribute("exeption", null);
-        return "search/hotels_search";
+        model.addAttribute("error", null);
+        return VIEW_HOTELS_SEARCH;
     }
 
     /**
@@ -70,7 +70,7 @@ public class HotelController {
             model.addAttribute("error", e.getMessage());
         }
         model.addAttribute("hotelDates", hotelDates);
-        return "search/hotels_search";
+        return VIEW_HOTELS_SEARCH;
     }
 
 }

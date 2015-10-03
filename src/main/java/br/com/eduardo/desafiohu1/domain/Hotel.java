@@ -3,8 +3,7 @@ package br.com.eduardo.desafiohu1.domain;
 import java.io.Serializable;
 
 /**
- * @author: eduardo.barbosa
- * @since: 30/09/2015
+ * Created by Eduardo on 30/09/2015
  */
 public class Hotel implements Serializable {
 

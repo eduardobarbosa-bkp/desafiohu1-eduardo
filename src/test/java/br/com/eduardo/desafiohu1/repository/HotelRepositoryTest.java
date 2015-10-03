@@ -17,8 +17,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * @author: eduardo.barbosa
- * @since: 02/10/2015
+ * Created by Eduardo on 02/10/2015
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)

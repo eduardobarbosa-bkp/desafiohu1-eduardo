@@ -36,10 +36,10 @@ public class HotelRepositoryImpl implements HotelRepository {
         while (scanner.hasNext()) {
             String[] record = scanner.next().split(",");
             String id = record[0];
-            String cidade = record[1];
-            String nome = record[2];
-            if (StringUtils.containsIgnoreCase(cidade, term) || StringUtils.containsIgnoreCase(nome, term)) {
-                list.add(new Hotel(id, cidade, nome));
+            String city = record[1];
+            String name = record[2];
+            if (StringUtils.containsIgnoreCase(city, term) || StringUtils.containsIgnoreCase(name, term)) {
+                list.add(new Hotel(id, city, name));
             }
         }
         scanner.close();
@@ -58,7 +58,7 @@ public class HotelRepositoryImpl implements HotelRepository {
             String[] record = scanner.next().split(",");
             String id = record[0];
             LocalDate date = LocalDate.parse(record[1], fmt);
-            Boolean available = "0".equals(record[2]) ? false : true;
+            Boolean available = !"0".equals(record[2]);
             if (id.equals(locationId) &&
                     ((beginDate == null && endDate == null)
                             || (!date.isBefore(LocalDate.fromDateFields(beginDate)) && !date.isAfter(LocalDate.fromDateFields(endDate).minusDays(1))))

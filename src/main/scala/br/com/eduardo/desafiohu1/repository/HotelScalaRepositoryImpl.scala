@@ -11,6 +11,9 @@ import scala.collection.JavaConversions._
 
 import scala.io.Source
 
+/**
+ * Created by Eduardo on 03/10/2015.
+ */
 @Repository("hotelScalaRepository")
 class HotelScalaRepositoryImpl extends HotelRepository{
 
@@ -51,7 +54,7 @@ class HotelScalaRepositoryImpl extends HotelRepository{
         val parts = line.split(",")
         val id: String = parts(0)
         val date: LocalDate = LocalDate.parse(parts(1), fmt)
-        val available: Boolean = if (("0" == parts(2))) false else true
+        val available: Boolean = !("0" == parts(2))
         new HotelDate(findHotelById(id), date.toDate, available)
       })
     result

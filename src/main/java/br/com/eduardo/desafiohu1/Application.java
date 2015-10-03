@@ -6,8 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author: eduardo.barbosa
- * @since: 29/09/2015
+ * Created by Eduardo on 29/09/2015
  */
 @Configuration
 @EnableAutoConfiguration
