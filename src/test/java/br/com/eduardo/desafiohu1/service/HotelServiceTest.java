@@ -27,11 +27,11 @@ import static org.junit.Assert.*;
 public class HotelServiceTest {
 
     private static final String INVALID_TERM = "xxxxxxx";
-    private String HOTEL_1_NOME = "Mercatto Casa Hotel";
-    private String CIDADE = "Araruama";
+    private String HOTEL_1_NAME = "Mercatto Casa Hotel";
+    private String CITY = "Araruama";
     private String HOTEL_1_ID = "1";
-    private Hotel HOTEL_1 = new Hotel(HOTEL_1_ID, CIDADE, HOTEL_1_NOME);
-    private Hotel HOTEL_2 = new Hotel("2", CIDADE, "Boulevard Higienopolis Residence Hotel");
+    private Hotel HOTEL_1 = new Hotel(HOTEL_1_ID, CITY, HOTEL_1_NAME);
+    private Hotel HOTEL_2 = new Hotel("2", CITY, "Boulevard Higienopolis Residence Hotel");
     private HotelDate HOTEL_DATE_1 = new HotelDate(HOTEL_1, LocalDate.now().toDate(), Boolean.TRUE);
     private HotelDate HOTEL_DATE_2 = new HotelDate(HOTEL_1, LocalDate.now().plusDays(1).toDate(), Boolean.FALSE);
 
@@ -47,8 +47,8 @@ public class HotelServiceTest {
     public void setup() throws Exception{
         MockitoAnnotations.initMocks(this);
         Mockito.when(repository.findHotelByTerm(INVALID_TERM)).thenReturn(Collections.EMPTY_LIST);
-        Mockito.when(repository.findHotelByTerm(HOTEL_1_NOME)).thenReturn(Arrays.asList(HOTEL_1));
-        Mockito.when(repository.findHotelByTerm(CIDADE)).thenReturn(Arrays.asList(HOTEL_1, HOTEL_2));
+        Mockito.when(repository.findHotelByTerm(HOTEL_1_NAME)).thenReturn(Arrays.asList(HOTEL_1));
+        Mockito.when(repository.findHotelByTerm(CITY)).thenReturn(Arrays.asList(HOTEL_1, HOTEL_2));
 
         LocalDate now = LocalDate.now();
         LocalDate tomorrow = now.plusDays(1);
@@ -72,16 +72,16 @@ public class HotelServiceTest {
 
     @Test
     public void findHotelByTermExact() throws Exception {
-        List<Hotel> list = service.findHotelByTerm(HOTEL_1_NOME);
+        List<Hotel> list = service.findHotelByTerm(HOTEL_1_NAME);
         assertNotNull(list);
         assertTrue(list.size() == 1);
         Hotel hotel = list.get(0);
-        assertSame(hotel.getNome(), HOTEL_1_NOME);
+        assertSame(hotel.getName(), HOTEL_1_NAME);
     }
 
     @Test
     public void findHotelByTermPartial() throws Exception {
-        List<Hotel> list = service.findHotelByTerm(CIDADE);
+        List<Hotel> list = service.findHotelByTerm(CITY);
         assertNotNull(list);
         assertTrue(list.size() == 2);
     }

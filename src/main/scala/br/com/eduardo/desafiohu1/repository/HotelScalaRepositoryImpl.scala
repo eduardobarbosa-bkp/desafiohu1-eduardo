@@ -18,17 +18,17 @@ class HotelScalaRepositoryImpl extends HotelRepository{
     val result =  Source.fromInputStream(getClass.getResourceAsStream(HotelRepository.DB_HOTEL_FILE_PATH)).getLines
     .filter(line => {
          val parts = line.split(",")
-         val cidade: String = parts(1)
-         val nome: String = parts(2)
-         cidade.toUpperCase.contains(term.toUpperCase) || nome.toUpperCase.contains(term.toUpperCase)
+         val city: String = parts(1)
+         val name: String = parts(2)
+          city.toUpperCase.contains(term.toUpperCase) || name.toUpperCase.contains(term.toUpperCase)
         }
     ).toList
     .map(line => {
        val parts = line.split(",")
        val id: String = parts(0)
-       val cidade: String = parts(1)
-       val nome: String = parts(2)
-       new Hotel(id, cidade, nome)
+       val city: String = parts(1)
+       val name: String = parts(2)
+       new Hotel(id, city, name)
       })
     result
   }
@@ -39,39 +39,38 @@ class HotelScalaRepositoryImpl extends HotelRepository{
       .filter(line => {
         val parts = line.split(",")
         val id: String = parts(0)
-        val data: LocalDate = LocalDate.parse(parts(1), fmt)
-        val disponibilidade: Boolean = if (("0" == parts(2))) false else true
+        val date: LocalDate = LocalDate.parse(parts(1), fmt)
         (id == locationId) &&
            (
             (beginDate == null && endDate == null)
-              || (!data.isBefore(LocalDate.fromDateFields(beginDate)) && !data.isAfter(LocalDate.fromDateFields(endDate).minusDays(1)))
+              || (!date.isBefore(LocalDate.fromDateFields(beginDate)) && !date.isAfter(LocalDate.fromDateFields(endDate).minusDays(1)))
             )
       }
       ).toList
       .map(line => {
         val parts = line.split(",")
         val id: String = parts(0)
-        val data: LocalDate = LocalDate.parse(parts(1), fmt)
-        val disponibilidade: Boolean = if (("0" == parts(2))) false else true
-        new HotelDate(findHotelById(id), data.toDate, disponibilidade)
+        val date: LocalDate = LocalDate.parse(parts(1), fmt)
+        val available: Boolean = if (("0" == parts(2))) false else true
+        new HotelDate(findHotelById(id), date.toDate, available)
       })
     result
   }
 
-  private def findHotelById(localtionId:String) : Hotel = {
+  private def findHotelById(locationId:String) : Hotel = {
     val result =  Source.fromInputStream(getClass.getResourceAsStream(HotelRepository.DB_HOTEL_FILE_PATH)).getLines
       .filter(line => {
         val parts = line.split(",")
         val id: String = parts(0)
-        id.equals(localtionId)
+        id.equals(locationId)
       }
       ).toList
       .map(line => {
         val parts = line.split(",")
         val id: String = parts(0)
-        val cidade: String = parts(1)
-        val nome: String = parts(2)
-        new Hotel(id, cidade, nome)
+        val city: String = parts(1)
+        val name: String = parts(2)
+        new Hotel(id, city, name)
       })
     result(0)
   }

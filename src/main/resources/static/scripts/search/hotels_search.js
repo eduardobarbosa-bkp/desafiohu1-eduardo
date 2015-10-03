@@ -33,7 +33,7 @@ $(function() {
             $.getJSON("/search/hotel/?term=" + request.term, function (data) {
                 response($.map(data, function (item) {
                     return {
-                        label: item.cidade +" - "+item.nome,
+                        label: item.city +" - "+item.name,
                         value: item.id
                     }
                 }));

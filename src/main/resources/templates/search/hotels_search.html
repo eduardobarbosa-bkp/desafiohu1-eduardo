@@ -73,8 +73,8 @@
             <th>Disponível</th>
         </tr>
         <tr th:each="hotelDate : ${hotelDates}">
-            <td th:text="${hotelDate.hotel.cidade}">Cidade</td>
-            <td th:text="${hotelDate.hotel.nome}">Hotel</td>
+            <td th:text="${hotelDate.hotel.city}">Cidade</td>
+            <td th:text="${hotelDate.hotel.name}">Hotel</td>
             <td th:text="${#dates.format(hotelDate.date, 'dd/MM/yyyy')}">Data</td>
             <td th:text="*{hotelDate.available} ? 'Sim' : 'Não'">Disponível</td>
         </tr>

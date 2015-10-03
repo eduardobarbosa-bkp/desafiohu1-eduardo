@@ -19,7 +19,7 @@ import java.util.List;
 public class HotelServiceImpl implements HotelService {
 
     @Autowired
-    @Qualifier("hotelRepository")
+    @Qualifier("hotelScalaRepository")
     private HotelRepository repository;
 
     @Override

@@ -25,16 +25,21 @@ import static org.junit.Assert.*;
 public class HotelRepositoryTest {
 
     private static final String INVALID_TERM = "xxxxxxx";
-    private static final String CIDADE = "Araruama";
-    private static final String HOTEL_1_NOME = "Mercatto Casa Hotel";
+    private static final String CITY = "Araruama";
+    private static final String HOTEL_1_NAME = "Mercatto Casa Hotel";
     private static final String HOTEL_TERM = "Pousada";
     private static final String HOTEL_1_ID = "1";
     private static final Date DATE_NOT_AVAILABLE = LocalDate.parse("2015-05-01").toDate();
     private static final Date DATE_AVAILABLE = LocalDate.parse("2015-05-04").toDate();
 
+
+    private HotelRepository repository;
+
     @Autowired
     @Qualifier("hotelRepository")
-    private HotelRepository repository;
+    public void setRepository(HotelRepository repository) {
+        this.repository = repository;
+    }
 
     @Test
     public void findHotelByTermNotFound() throws Exception {
@@ -45,16 +50,16 @@ public class HotelRepositoryTest {
 
     @Test
     public void findHotelByTermExact() throws Exception {
-        List<Hotel> list = repository.findHotelByTerm(HOTEL_1_NOME);
+        List<Hotel> list = repository.findHotelByTerm(HOTEL_1_NAME);
         assertNotNull(list);
         assertTrue(list.size() == 1);
         Hotel hotel = list.get(0);
-        assertEquals(hotel.getNome(), HOTEL_1_NOME);
+        assertEquals(hotel.getName(), HOTEL_1_NAME);
     }
 
     @Test
     public void findHotelByTermPartialCidade() throws Exception {
-        List<Hotel> list = repository.findHotelByTerm(CIDADE);
+        List<Hotel> list = repository.findHotelByTerm(CITY);
         assertNotNull(list);
         assertTrue(list.size() == 2);
     }

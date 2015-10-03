@@ -12,14 +12,14 @@ public class Hotel implements Serializable {
 
     private String id;
 
-    private String cidade;
+    private String city;
 
-    private String nome;
+    private String name;
 
-    public Hotel(String id, String cidade, String nome) {
+    public Hotel(String id, String city, String name) {
         this.id = id;
-        this.cidade = cidade;
-        this.nome = nome;
+        this.city = city;
+        this.name = name;
     }
 
     public String getId() {
@@ -30,20 +30,20 @@ public class Hotel implements Serializable {
         this.id = id;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCity() {
+        return city;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

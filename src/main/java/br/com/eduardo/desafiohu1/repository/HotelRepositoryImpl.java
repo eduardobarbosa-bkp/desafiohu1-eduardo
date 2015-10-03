@@ -57,13 +57,13 @@ public class HotelRepositoryImpl implements HotelRepository {
         while (scanner.hasNext()) {
             String[] record = scanner.next().split(",");
             String id = record[0];
-            LocalDate data = LocalDate.parse(record[1], fmt);
-            Boolean disponibilidade = "0".equals(record[2]) ? false : true;
+            LocalDate date = LocalDate.parse(record[1], fmt);
+            Boolean available = "0".equals(record[2]) ? false : true;
             if (id.equals(locationId) &&
                     ((beginDate == null && endDate == null)
-                            || (!data.isBefore(LocalDate.fromDateFields(beginDate)) && !data.isAfter(LocalDate.fromDateFields(endDate).minusDays(1))))
+                            || (!date.isBefore(LocalDate.fromDateFields(beginDate)) && !date.isAfter(LocalDate.fromDateFields(endDate).minusDays(1))))
                     ) {
-                list.add(new HotelDate(findHotelById(locationId), data.toDate(), disponibilidade));
+                list.add(new HotelDate(findHotelById(locationId), date.toDate(), available));
             }
         }
         scanner.close();
@@ -72,7 +72,7 @@ public class HotelRepositoryImpl implements HotelRepository {
 
 
 
-    private Hotel findHotelById(String localtionId) throws Exception {
+    private Hotel findHotelById(String locationId) throws Exception {
 
         Hotel hotel = null;
         URI uriFile = this.getClass().getResource(DB_HOTEL_FILE_PATH).toURI();
@@ -83,10 +83,10 @@ public class HotelRepositoryImpl implements HotelRepository {
         while (scanner.hasNext() && !find) {
             String[] record = scanner.next().split(",");
             String id = record[0];
-            String cidade = record[1];
-            String nome = record[2];
-            if (StringUtils.equals(id, localtionId)) {
-                hotel = new Hotel(id, cidade, nome);
+            String city = record[1];
+            String name = record[2];
+            if (StringUtils.equals(id, locationId)) {
+                hotel = new Hotel(id, city, name);
                 find = true;
             }
         }
