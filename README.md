@@ -6,6 +6,7 @@ Busca de hoteis e disponibilidade por data
 
 ***Run***
 * Na linha de comando digite os comandos: 
+
 >1. *mvn package*
 2. *mvn spring-boot:run*
 	
